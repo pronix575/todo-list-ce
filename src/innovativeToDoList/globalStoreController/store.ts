@@ -1,4 +1,4 @@
-import { Stream } from "../../observablePattern/FLux";
+import { Stream } from "../../observable/FLux";
 import { ITodoItem } from "../types/types";
 import fs from 'fs' 
 
