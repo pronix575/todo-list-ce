@@ -17,8 +17,8 @@ export const printTodos = (todos: Array<ITodoItem>) => {
     console.log(
         todos
             .map(todo => `
-${ todo.text }
-${ (todo.isDone && chalk.green('✔️ ')) || '' }${ (!todo.isDone && chalk.red('❌')) || '' } ${ chalk.grey(todo.createdDate.toDateString()) }`)
+${ (todo.isDone && chalk.green('✔️ ')) || '' }${ (!todo.isDone && chalk.red('❌')) || '' } ${ todo.text }
+${ chalk.grey(todo.createdDate.toDateString()) }`)
             .join(`
 `)
     )
