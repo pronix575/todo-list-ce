@@ -114,18 +114,34 @@ ${ chalk.yellow(
         make: () => {
             console.log(captions)
         }
-    }
+    },
+    {
+        name: '/',
+        make: () => console.log(
+            `
+${ chalk.green(`available commands:`) }
+${ chalk.yellow(
+    commands
+    .map(command => command.name)
+    .join(' ')
+    )
+}\n
+`)
+        },
+        {
+            name: '',
+            make: () => {}
+        },
 ]
 
-export const listen = () => {
-    const response = question(chalk.blue(`${ chalk.bold.white('app') }:\\> `))
+const interactionsLogic = (cmd: string) => {
     const command = commands
-                        .find(command => command.name === response)
+                        .find(command => command.name === cmd)
     
     if (!command) {
         console.log(`
 ${ chalk.red(`[error] type: 1`) }
-${ chalk.yellow(`no such a command: '${ chalk.blueBright(response) }',
+${ chalk.yellow(`no such a command: '${ chalk.blueBright(cmd) }',
 type ${ chalk.white(`/help`) } to see all available commands`) }
         `)
         listen()
@@ -134,4 +150,16 @@ type ${ chalk.white(`/help`) } to see all available commands`) }
     
     command.make()
     listen()
+}
+
+export const listen = (cmd?: string) => {
+
+    if (cmd) {
+        interactionsLogic(cmd)
+        return
+    }
+
+    const response = question(chalk.blue(`${ chalk.bold.white('app') }:\\> `))
+    
+    interactionsLogic(response)
 }
