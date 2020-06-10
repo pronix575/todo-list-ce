@@ -24,3 +24,16 @@ ${ (todo.isDone && chalk.green('✔️ ')) || '' }${ (!todo.isDone && chalk.red(
     )
     console.log(``)
 }
+
+export const printTodosWithId = (todos: Array<ITodoItem>) => {
+    console.log(
+        todos
+            .map(todo => `
+${ todo.text }
+[id]: ${ chalk.yellow(todo.id) }
+`)
+            .join(`
+`)
+    )
+    console.log(``)
+}
